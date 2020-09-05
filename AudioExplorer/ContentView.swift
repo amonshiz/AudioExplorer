@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  AuidoExplorer
+//  AudioExplorer
 //
 //  Created by Andrew Monshizadeh on 9/5/20.
 //

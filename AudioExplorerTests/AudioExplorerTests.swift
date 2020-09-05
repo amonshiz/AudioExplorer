@@ -1,14 +1,14 @@
 //
-//  AuidoExplorerTests.swift
-//  AuidoExplorerTests
+//  AudioExplorerTests.swift
+//  AudioExplorerTests
 //
 //  Created by Andrew Monshizadeh on 9/5/20.
 //
 
 import XCTest
-@testable import AuidoExplorer
+@testable import AudioExplorer
 
-class AuidoExplorerTests: XCTestCase {
+class AudioExplorerTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

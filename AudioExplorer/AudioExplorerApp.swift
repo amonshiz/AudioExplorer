@@ -1,6 +1,6 @@
 //
-//  AuidoExplorerApp.swift
-//  AuidoExplorer
+//  AudioExplorerApp.swift
+//  AudioExplorer
 //
 //  Created by Andrew Monshizadeh on 9/5/20.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct AuidoExplorerApp: App {
+struct AudioExplorerApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
