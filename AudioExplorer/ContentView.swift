@@ -18,6 +18,12 @@ struct ContentView: View {
           if let image = devices[index].image {
             Image(nsImage: image)
           }
+          if devices[index].input {
+            Text("Has Input")
+          }
+          if devices[index].output {
+            Text("Has Output")
+          }
         }
       }
     }
