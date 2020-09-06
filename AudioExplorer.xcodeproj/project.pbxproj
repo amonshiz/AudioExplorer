@@ -1,0 +1,606 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DAB2958F250401050018D9BC /* AudioExplorerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB2958E250401050018D9BC /* AudioExplorerApp.swift */; };
+		DAB29591250401050018D9BC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB29590250401050018D9BC /* ContentView.swift */; };
+		DAB29593250401060018D9BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAB29592250401060018D9BC /* Assets.xcassets */; };
+		DAB29596250401060018D9BC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAB29595250401060018D9BC /* Preview Assets.xcassets */; };
+		DAB295A2250401060018D9BC /* AudioExplorerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB295A1250401060018D9BC /* AudioExplorerTests.swift */; };
+		DAB295AD250401060018D9BC /* AudioExplorerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB295AC250401060018D9BC /* AudioExplorerUITests.swift */; };
+		DAB295BC250401340018D9BC /* AudioDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB295BB250401340018D9BC /* AudioDevice.swift */; };
+		DAB295BE250401720018D9BC /* AudioDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB295BD250401720018D9BC /* AudioDeviceManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DAB2959E250401060018D9BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DAB29583250401050018D9BC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DAB2958A250401050018D9BC;
+			remoteInfo = AudioExplorer;
+		};
+		DAB295A9250401060018D9BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DAB29583250401050018D9BC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DAB2958A250401050018D9BC;
+			remoteInfo = AudioExplorer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DAB2958B250401050018D9BC /* AudioExplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioExplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAB2958E250401050018D9BC /* AudioExplorerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioExplorerApp.swift; sourceTree = "<group>"; };
+		DAB29590250401050018D9BC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DAB29592250401060018D9BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DAB29595250401060018D9BC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DAB29597250401060018D9BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAB29598250401060018D9BC /* AudioExplorer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AudioExplorer.entitlements; sourceTree = "<group>"; };
+		DAB2959D250401060018D9BC /* AudioExplorerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudioExplorerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAB295A1250401060018D9BC /* AudioExplorerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioExplorerTests.swift; sourceTree = "<group>"; };
+		DAB295A3250401060018D9BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAB295A8250401060018D9BC /* AudioExplorerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudioExplorerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAB295AC250401060018D9BC /* AudioExplorerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioExplorerUITests.swift; sourceTree = "<group>"; };
+		DAB295AE250401060018D9BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAB295BB250401340018D9BC /* AudioDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDevice.swift; sourceTree = "<group>"; };
+		DAB295BD250401720018D9BC /* AudioDeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDeviceManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DAB29588250401050018D9BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAB2959A250401060018D9BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAB295A5250401060018D9BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DAB29582250401050018D9BC = {
+			isa = PBXGroup;
+			children = (
+				DAB2958D250401050018D9BC /* AudioExplorer */,
+				DAB295A0250401060018D9BC /* AudioExplorerTests */,
+				DAB295AB250401060018D9BC /* AudioExplorerUITests */,
+				DAB2958C250401050018D9BC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DAB2958C250401050018D9BC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DAB2958B250401050018D9BC /* AudioExplorer.app */,
+				DAB2959D250401060018D9BC /* AudioExplorerTests.xctest */,
+				DAB295A8250401060018D9BC /* AudioExplorerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DAB2958D250401050018D9BC /* AudioExplorer */ = {
+			isa = PBXGroup;
+			children = (
+				DAB295BA2504012A0018D9BC /* AudioDevice */,
+				DAB2958E250401050018D9BC /* AudioExplorerApp.swift */,
+				DAB29590250401050018D9BC /* ContentView.swift */,
+				DAB29592250401060018D9BC /* Assets.xcassets */,
+				DAB29597250401060018D9BC /* Info.plist */,
+				DAB29598250401060018D9BC /* AudioExplorer.entitlements */,
+				DAB29594250401060018D9BC /* Preview Content */,
+			);
+			path = AudioExplorer;
+			sourceTree = "<group>";
+		};
+		DAB29594250401060018D9BC /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				DAB29595250401060018D9BC /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DAB295A0250401060018D9BC /* AudioExplorerTests */ = {
+			isa = PBXGroup;
+			children = (
+				DAB295A1250401060018D9BC /* AudioExplorerTests.swift */,
+				DAB295A3250401060018D9BC /* Info.plist */,
+			);
+			path = AudioExplorerTests;
+			sourceTree = "<group>";
+		};
+		DAB295AB250401060018D9BC /* AudioExplorerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DAB295AC250401060018D9BC /* AudioExplorerUITests.swift */,
+				DAB295AE250401060018D9BC /* Info.plist */,
+			);
+			path = AudioExplorerUITests;
+			sourceTree = "<group>";
+		};
+		DAB295BA2504012A0018D9BC /* AudioDevice */ = {
+			isa = PBXGroup;
+			children = (
+				DAB295BB250401340018D9BC /* AudioDevice.swift */,
+				DAB295BD250401720018D9BC /* AudioDeviceManager.swift */,
+			);
+			path = AudioDevice;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DAB2958A250401050018D9BC /* AudioExplorer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAB295B1250401060018D9BC /* Build configuration list for PBXNativeTarget "AudioExplorer" */;
+			buildPhases = (
+				DAB29587250401050018D9BC /* Sources */,
+				DAB29588250401050018D9BC /* Frameworks */,
+				DAB29589250401050018D9BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AudioExplorer;
+			productName = AudioExplorer;
+			productReference = DAB2958B250401050018D9BC /* AudioExplorer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DAB2959C250401060018D9BC /* AudioExplorerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAB295B4250401060018D9BC /* Build configuration list for PBXNativeTarget "AudioExplorerTests" */;
+			buildPhases = (
+				DAB29599250401060018D9BC /* Sources */,
+				DAB2959A250401060018D9BC /* Frameworks */,
+				DAB2959B250401060018D9BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DAB2959F250401060018D9BC /* PBXTargetDependency */,
+			);
+			name = AudioExplorerTests;
+			productName = AudioExplorerTests;
+			productReference = DAB2959D250401060018D9BC /* AudioExplorerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DAB295A7250401060018D9BC /* AudioExplorerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAB295B7250401060018D9BC /* Build configuration list for PBXNativeTarget "AudioExplorerUITests" */;
+			buildPhases = (
+				DAB295A4250401060018D9BC /* Sources */,
+				DAB295A5250401060018D9BC /* Frameworks */,
+				DAB295A6250401060018D9BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DAB295AA250401060018D9BC /* PBXTargetDependency */,
+			);
+			name = AudioExplorerUITests;
+			productName = AudioExplorerUITests;
+			productReference = DAB295A8250401060018D9BC /* AudioExplorerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DAB29583250401050018D9BC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					DAB2958A250401050018D9BC = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					DAB2959C250401060018D9BC = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = DAB2958A250401050018D9BC;
+					};
+					DAB295A7250401060018D9BC = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = DAB2958A250401050018D9BC;
+					};
+				};
+			};
+			buildConfigurationList = DAB29586250401050018D9BC /* Build configuration list for PBXProject "AudioExplorer" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DAB29582250401050018D9BC;
+			productRefGroup = DAB2958C250401050018D9BC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DAB2958A250401050018D9BC /* AudioExplorer */,
+				DAB2959C250401060018D9BC /* AudioExplorerTests */,
+				DAB295A7250401060018D9BC /* AudioExplorerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DAB29589250401050018D9BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAB29596250401060018D9BC /* Preview Assets.xcassets in Resources */,
+				DAB29593250401060018D9BC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAB2959B250401060018D9BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAB295A6250401060018D9BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DAB29587250401050018D9BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAB295BE250401720018D9BC /* AudioDeviceManager.swift in Sources */,
+				DAB29591250401050018D9BC /* ContentView.swift in Sources */,
+				DAB2958F250401050018D9BC /* AudioExplorerApp.swift in Sources */,
+				DAB295BC250401340018D9BC /* AudioDevice.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAB29599250401060018D9BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAB295A2250401060018D9BC /* AudioExplorerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAB295A4250401060018D9BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAB295AD250401060018D9BC /* AudioExplorerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DAB2959F250401060018D9BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DAB2958A250401050018D9BC /* AudioExplorer */;
+			targetProxy = DAB2959E250401060018D9BC /* PBXContainerItemProxy */;
+		};
+		DAB295AA250401060018D9BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DAB2958A250401050018D9BC /* AudioExplorer */;
+			targetProxy = DAB295A9250401060018D9BC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		DAB295AF250401060018D9BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DAB295B0250401060018D9BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		DAB295B2250401060018D9BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AudioExplorer/AudioExplorer.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"AudioExplorer/Preview Content\"";
+				DEVELOPMENT_TEAM = BDKG93339Q;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = AudioExplorer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amonshiz.AudioExplorer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		DAB295B3250401060018D9BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AudioExplorer/AudioExplorer.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"AudioExplorer/Preview Content\"";
+				DEVELOPMENT_TEAM = BDKG93339Q;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = AudioExplorer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amonshiz.AudioExplorer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		DAB295B5250401060018D9BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = BDKG93339Q;
+				INFOPLIST_FILE = AudioExplorerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amonshiz.AudioExplorerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AudioExplorer.app/Contents/MacOS/AudioExplorer";
+			};
+			name = Debug;
+		};
+		DAB295B6250401060018D9BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = BDKG93339Q;
+				INFOPLIST_FILE = AudioExplorerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amonshiz.AudioExplorerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AudioExplorer.app/Contents/MacOS/AudioExplorer";
+			};
+			name = Release;
+		};
+		DAB295B8250401060018D9BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = BDKG93339Q;
+				INFOPLIST_FILE = AudioExplorerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.amonshiz.AudioExplorerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = AudioExplorer;
+			};
+			name = Debug;
+		};
+		DAB295B9250401060018D9BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = BDKG93339Q;
+				INFOPLIST_FILE = AudioExplorerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.amonshiz.AudioExplorerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = AudioExplorer;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DAB29586250401050018D9BC /* Build configuration list for PBXProject "AudioExplorer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAB295AF250401060018D9BC /* Debug */,
+				DAB295B0250401060018D9BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DAB295B1250401060018D9BC /* Build configuration list for PBXNativeTarget "AudioExplorer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAB295B2250401060018D9BC /* Debug */,
+				DAB295B3250401060018D9BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DAB295B4250401060018D9BC /* Build configuration list for PBXNativeTarget "AudioExplorerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAB295B5250401060018D9BC /* Debug */,
+				DAB295B6250401060018D9BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DAB295B7250401060018D9BC /* Build configuration list for PBXNativeTarget "AudioExplorerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAB295B8250401060018D9BC /* Debug */,
+				DAB295B9250401060018D9BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DAB29583250401050018D9BC /* Project object */;
+}
