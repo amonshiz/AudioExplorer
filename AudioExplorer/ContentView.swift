@@ -9,8 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+      let devices = AudioDeviceManager.shared.allDevices
+
+      ForEach(devices.indices) { index in
+        VStack {
+          Text("\(devices[index].id)")
+          Text("\(devices[index].name)")
+          if let image = devices[index].image {
+            Image(nsImage: image)
+          }
+        }
+      }
     }
 }
 

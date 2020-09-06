@@ -48,6 +48,54 @@ extension AudioDevice {
   }
 }
 
+extension AudioDevice {
+  var imageURL: URL? {
+    var imageURLPropertyAddress = AudioObjectPropertyAddress(
+      mSelector: AudioObjectPropertySelector(kAudioDevicePropertyIcon),
+      mScope: AudioObjectPropertyScope(kAudioObjectPropertyScopeGlobal),
+      mElement: AudioObjectPropertyElement(kAudioObjectPropertyElementWildcard))
+
+    guard AudioObjectHasProperty(self.id, &imageURLPropertyAddress) else {
+      print("image property not available")
+      return nil
+    }
+
+    var imageURLSize: UInt32 = 0
+    let imageURLSizeStatus = AudioObjectGetPropertyDataSize(
+      self.id,
+      &imageURLPropertyAddress,
+      0, nil, /* NO IDEA */
+      &imageURLSize)
+
+    guard imageURLSizeStatus == kAudioServicesNoError else {
+      fatalError("unable to get size of imageURL: \(imageURLSizeStatus)")
+    }
+
+    var cfURLSize = UInt32(MemoryLayout<CFURL>.size)
+    var imageCFURL: Unmanaged<CFURL>?
+    let imageURLStatus = AudioObjectGetPropertyData(
+      self.id,
+      &imageURLPropertyAddress,
+      0, nil, /* NO IDEA */
+      &cfURLSize,
+      &imageCFURL)
+
+    guard imageURLStatus == kAudioServicesNoError else {
+      fatalError("unable to get name: \(imageURLStatus)")
+    }
+
+    return imageCFURL?.takeRetainedValue() as URL?
+  }
+
+  var image: NSImage? {
+    if let url = imageURL {
+      return NSImage(contentsOf: url)
+    }
+
+    return nil
+  }
+}
+
 
 #if DEBUG
 import SwiftUI
@@ -60,6 +108,9 @@ struct ADPreview: PreviewProvider {
       VStack {
         Text("\(devices[index].id)")
         Text("\(devices[index].name)")
+        if let image = devices[index].image {
+          Image(nsImage: image)
+        }
       }
     }
   }
