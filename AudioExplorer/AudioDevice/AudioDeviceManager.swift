@@ -21,9 +21,9 @@ extension AudioDeviceManager: DeviceProvider {
   public var allDevices: [AudioDevice] {
     get {
       var devicesPropertyAddress = AudioObjectPropertyAddress(
-        mSelector: AudioObjectPropertySelector(kAudioHardwarePropertyDevices),
-        mScope: AudioObjectPropertyScope(kAudioObjectPropertyScopeGlobal),
-        mElement: AudioObjectPropertyElement(kAudioObjectPropertyElementWildcard))
+        mSelector: kAudioHardwarePropertyDevices,
+        mScope: kAudioObjectPropertyScopeGlobal,
+        mElement: kAudioObjectPropertyElementMaster)
 
       var numberOfDevicesSize: UInt32 = 0
       let devicesSizeStatus = AudioObjectGetPropertyDataSize(
