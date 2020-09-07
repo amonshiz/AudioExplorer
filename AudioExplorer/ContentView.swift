@@ -15,8 +15,8 @@ struct ContentView: View {
       VStack {
         Text("\(devices[index].id)")
         Text("\(devices[index].name)")
-        if let image = devices[index].image {
-          Image(nsImage: image)
+        if let icon = devices[index].icon {
+          Image(nsImage: icon)
         }
         if devices[index].input {
           Text("Has Input")

@@ -129,7 +129,7 @@ extension AudioDevice {
 }
 
 extension AudioDevice {
-  var imageURL: URL? {
+  var iconURL: URL? { 
     var imageURLPropertyAddress = AudioDeviceProperty.iconURL.address
 
     guard AudioObjectHasProperty(self.id, &imageURLPropertyAddress) else {
@@ -164,8 +164,8 @@ extension AudioDevice {
     return imageCFURL?.takeRetainedValue() as URL?
   }
 
-  var image: NSImage? {
-    if let url = imageURL {
+  var icon: NSImage? {
+    if let url = iconURL {
       return NSImage(contentsOf: url)
     }
 
@@ -185,7 +185,7 @@ struct ADPreview: PreviewProvider {
       VStack {
         Text("\(devices[index].id)")
         Text("\(devices[index].name)")
-        if let image = devices[index].image {
+        if let image = devices[index].icon {
           Image(nsImage: image)
         }
         if devices[index].input {
