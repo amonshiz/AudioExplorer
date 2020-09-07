@@ -12,11 +12,48 @@ import AudioToolbox
 
 public struct AudioDevice {
   let id: AudioDeviceID
+
+  private func property<T>(for description: AudioDevicePropertyDescription<T>) -> T? where T: AnyObject {
+    var address = description.address
+
+    guard AudioObjectHasProperty(id, &address) else {
+      print("property for address not available \(address)")
+      return nil
+    }
+
+    var propertySize: UInt32 = 0
+    let sizeStatus = AudioObjectGetPropertyDataSize(
+      id,
+      &address,
+      0, nil,
+      &propertySize)
+
+    guard sizeStatus == kAudioHardwareNoError else {
+      print("unable to get size for address \(address)")
+      return nil
+    }
+
+    var typeSize = description.elementSize
+    var holder: Unmanaged<T>?
+    let accessStatus = AudioObjectGetPropertyData(
+      id,
+      &address,
+      0, nil,
+      &typeSize,
+      &holder)
+
+    guard accessStatus == kAudioHardwareNoError else {
+      print("unable to access address \(address)")
+      return nil
+    }
+
+    return holder?.takeRetainedValue() as T?
+  }
 }
 
 extension AudioDevice {
-  private func supports(configuration: AudioDeviceProperty) -> Bool {
-    var configurationAddress = configuration.address
+  func configuration(for scope: AudioDevicePropertyDescription<UnsafeMutableAudioBufferListPointer>) -> UnsafeMutableAudioBufferListPointer {
+    var configurationAddress = scope.address
 
     var configurationPropertySize: UInt32 = 0
     let configurationPropertySizeStatus = AudioObjectGetPropertyDataSize(
@@ -29,7 +66,8 @@ extension AudioDevice {
       fatalError("unable to determine size of streams property")
     }
 
-    let bufferList = AudioBufferList.allocate(maximumBuffers: Int(configurationPropertySize))
+    let numberOfBuffers = configurationPropertySize / scope.elementSize
+    let bufferList = AudioBufferList.allocate(maximumBuffers: Int(numberOfBuffers))
     let bufferListStatus = AudioObjectGetPropertyData(
       self.id,
       &configurationAddress,
@@ -41,9 +79,12 @@ extension AudioDevice {
       fatalError("unable to fill buffer list")
     }
 
-    let bufferListPointee = bufferList.unsafeMutablePointer.pointee
+    return bufferList
+  }
 
-    for index in 0 ..< bufferListPointee.mNumberBuffers {
+  private func supports(configuration: AudioDevicePropertyDescription<UnsafeMutableAudioBufferListPointer>) -> Bool {
+    let bufferList = self.configuration(for: configuration)
+    for index in 0 ..< bufferList.unsafeMutablePointer.pointee.mNumberBuffers {
       let buffer = bufferList[Int(index)]
       return buffer.mNumberChannels > 0
     }
@@ -55,15 +96,19 @@ extension AudioDevice {
   var output: Bool { supports(configuration: AudioDeviceProperty.StreamConfiguration.output) }
 }
 
-struct AudioDeviceProperty {
+struct AudioDevicePropertyDescription<Element> {
   let selector: AudioObjectPropertySelector
   let scope: AudioObjectPropertyScope
   let element: AudioObjectPropertyElement
+  let elementType: Element.Type
+  let elementSize: UInt32
 
-  private init(selector se: AudioObjectPropertySelector, scope sc: AudioObjectPropertyScope, element el: AudioObjectPropertyElement) {
+  fileprivate init(selector se: AudioObjectPropertySelector, scope sc: AudioObjectPropertyScope, element el: AudioObjectPropertyElement) {
     selector = se
     scope = sc
     element = el
+    elementType = Element.self
+    elementSize = UInt32(MemoryLayout<Element>.size)
   }
 
   var address: AudioObjectPropertyAddress {
@@ -71,25 +116,24 @@ struct AudioDeviceProperty {
   }
 }
 
-extension AudioDeviceProperty {
-  static var name: AudioDeviceProperty =
-    AudioDeviceProperty(
+enum AudioDeviceProperty {
+  static var name = AudioDevicePropertyDescription<CFString>(
       selector: kAudioDevicePropertyDeviceNameCFString,
       scope: kAudioObjectPropertyScopeGlobal,
       element: kAudioObjectPropertyElementWildcard)
 
-  static var iconURL = AudioDeviceProperty(
+  static var iconURL = AudioDevicePropertyDescription<CFURL>(
     selector: kAudioDevicePropertyIcon,
     scope: kAudioObjectPropertyScopeGlobal,
     element: kAudioObjectPropertyElementWildcard)
 
   enum StreamConfiguration {
-    static var input = AudioDeviceProperty(
+    static var input = AudioDevicePropertyDescription<UnsafeMutableAudioBufferListPointer>(
       selector: kAudioDevicePropertyStreamConfiguration,
       scope: kAudioDevicePropertyScopeInput,
       element: kAudioObjectPropertyElementWildcard)
 
-    static var output = AudioDeviceProperty(
+    static var output = AudioDevicePropertyDescription<UnsafeMutableAudioBufferListPointer>(
       selector: kAudioDevicePropertyStreamConfiguration,
       scope: kAudioDevicePropertyScopeOutput,
       element: kAudioObjectPropertyElementWildcard)
@@ -97,73 +141,11 @@ extension AudioDeviceProperty {
 }
 
 extension AudioDevice {
-  var name: String {
-    var namePropertyAddress = AudioDeviceProperty.name.address
-
-    var nameSize: UInt32 = 0
-    let nameSizeStatus = AudioObjectGetPropertyDataSize(
-      self.id,
-      &namePropertyAddress,
-      0, nil, /* NO IDEA */
-      &nameSize)
-
-    guard nameSizeStatus == kAudioServicesNoError else {
-      fatalError("unable to get size of name: \(nameSizeStatus)")
-    }
-
-    var cfStringSize = UInt32(MemoryLayout<CFString>.size)
-    var nameCFString: Unmanaged<CFString>?
-    let nameStatus = AudioObjectGetPropertyData(
-      self.id,
-      &namePropertyAddress,
-      0, nil, /* NO IDEA */
-      &cfStringSize,
-      &nameCFString)
-
-    guard nameStatus == kAudioServicesNoError else {
-      fatalError("unable to get name: \(nameStatus)")
-    }
-
-    return nameCFString?.takeRetainedValue() as String? ?? "UNKNOWN"
-  }
+  var name: String? { property(for: AudioDeviceProperty.name) as String? }
 }
 
 extension AudioDevice {
-  var iconURL: URL? { 
-    var imageURLPropertyAddress = AudioDeviceProperty.iconURL.address
-
-    guard AudioObjectHasProperty(self.id, &imageURLPropertyAddress) else {
-      print("image property not available")
-      return nil
-    }
-
-    var imageURLSize: UInt32 = 0
-    let imageURLSizeStatus = AudioObjectGetPropertyDataSize(
-      self.id,
-      &imageURLPropertyAddress,
-      0, nil, /* NO IDEA */
-      &imageURLSize)
-
-    guard imageURLSizeStatus == kAudioServicesNoError else {
-      fatalError("unable to get size of imageURL: \(imageURLSizeStatus)")
-    }
-
-    var cfURLSize = UInt32(MemoryLayout<CFURL>.size)
-    var imageCFURL: Unmanaged<CFURL>?
-    let imageURLStatus = AudioObjectGetPropertyData(
-      self.id,
-      &imageURLPropertyAddress,
-      0, nil, /* NO IDEA */
-      &cfURLSize,
-      &imageCFURL)
-
-    guard imageURLStatus == kAudioServicesNoError else {
-      fatalError("unable to get name: \(imageURLStatus)")
-    }
-
-    return imageCFURL?.takeRetainedValue() as URL?
-  }
-
+  var iconURL: URL? { property(for: AudioDeviceProperty.iconURL) as URL? }
   var icon: NSImage? {
     if let url = iconURL {
       return NSImage(contentsOf: url)
@@ -184,7 +166,7 @@ struct ADPreview: PreviewProvider {
     ForEach(devices.indices) { index in
       VStack {
         Text("\(devices[index].id)")
-        Text("\(devices[index].name)")
+        Text("\(devices[index].name ?? "MISSING")")
         if let image = devices[index].icon {
           Image(nsImage: image)
         }

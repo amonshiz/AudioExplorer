@@ -14,7 +14,7 @@ struct ContentView: View {
     ForEach(devices.indices) { index in
       VStack {
         Text("\(devices[index].id)")
-        Text("\(devices[index].name)")
+        Text("\(devices[index].name ?? "MISSING")")
         if let icon = devices[index].icon {
           Image(nsImage: icon)
         }
