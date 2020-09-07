@@ -50,21 +50,6 @@ extension AudioDeviceManager: DeviceProvider {
         fatalError("unable to get device ids: \(deviceIDsStatus)")
       }
 
-      var defaultInputAddress = AudioObjectPropertyAddress(
-        mSelector: kAudioHardwarePropertyDefaultInputDevice,
-        mScope: kAudioObjectPropertyScopeGlobal,
-        mElement: kAudioObjectPropertyElementMaster)
-      var idSize = UInt32(MemoryLayout<AudioDeviceID>.size)
-
-      var defaultInputID: AudioDeviceID = 0
-      let defaultStatus = AudioObjectGetPropertyData(
-        AudioDeviceID(kAudioObjectSystemObject),
-        &defaultInputAddress,
-        0, nil,
-        &idSize,
-        &defaultInputID)
-      rawDeviceIDs.append(defaultInputID)
-
       let devices = rawDeviceIDs.map(AudioDevice.init(id:))
       return devices
     }
