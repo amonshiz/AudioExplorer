@@ -15,11 +15,8 @@ public struct AudioDevice {
 }
 
 extension AudioDevice {
-  private func supports(scope: AudioObjectPropertyScope) -> Bool {
-    var configurationAddress = AudioObjectPropertyAddress(
-      mSelector: kAudioDevicePropertyStreamConfiguration,
-      mScope: scope,
-      mElement: kAudioObjectPropertyElementWildcard)
+  private func supports(configuration: AudioDeviceProperty) -> Bool {
+    var configurationAddress = configuration.address
 
     var configurationPropertySize: UInt32 = 0
     let configurationPropertySizeStatus = AudioObjectGetPropertyDataSize(
@@ -54,16 +51,54 @@ extension AudioDevice {
     return false
   }
 
-  var input: Bool { supports(scope: kAudioDevicePropertyScopeInput) }
-  var output: Bool { supports(scope: kAudioDevicePropertyScopeOutput) }
+  var input: Bool { supports(configuration: AudioDeviceProperty.StreamConfiguration.input) }
+  var output: Bool { supports(configuration: AudioDeviceProperty.StreamConfiguration.output) }
+}
+
+struct AudioDeviceProperty {
+  let selector: AudioObjectPropertySelector
+  let scope: AudioObjectPropertyScope
+  let element: AudioObjectPropertyElement
+
+  private init(selector se: AudioObjectPropertySelector, scope sc: AudioObjectPropertyScope, element el: AudioObjectPropertyElement) {
+    selector = se
+    scope = sc
+    element = el
+  }
+
+  var address: AudioObjectPropertyAddress {
+    AudioObjectPropertyAddress(mSelector: selector, mScope: scope, mElement: element)
+  }
+}
+
+extension AudioDeviceProperty {
+  static var name: AudioDeviceProperty =
+    AudioDeviceProperty(
+      selector: kAudioDevicePropertyDeviceNameCFString,
+      scope: kAudioObjectPropertyScopeGlobal,
+      element: kAudioObjectPropertyElementWildcard)
+
+  static var iconURL = AudioDeviceProperty(
+    selector: kAudioDevicePropertyIcon,
+    scope: kAudioObjectPropertyScopeGlobal,
+    element: kAudioObjectPropertyElementWildcard)
+
+  enum StreamConfiguration {
+    static var input = AudioDeviceProperty(
+      selector: kAudioDevicePropertyStreamConfiguration,
+      scope: kAudioDevicePropertyScopeInput,
+      element: kAudioObjectPropertyElementWildcard)
+
+    static var output = AudioDeviceProperty(
+      selector: kAudioDevicePropertyStreamConfiguration,
+      scope: kAudioDevicePropertyScopeOutput,
+      element: kAudioObjectPropertyElementWildcard)
+  }
 }
 
 extension AudioDevice {
   var name: String {
-    var namePropertyAddress = AudioObjectPropertyAddress(
-      mSelector: AudioObjectPropertySelector(kAudioDevicePropertyDeviceNameCFString),
-      mScope: AudioObjectPropertyScope(kAudioObjectPropertyScopeGlobal),
-      mElement: AudioObjectPropertyElement(kAudioObjectPropertyElementWildcard))
+    var namePropertyAddress = AudioDeviceProperty.name.address
 
     var nameSize: UInt32 = 0
     let nameSizeStatus = AudioObjectGetPropertyDataSize(
@@ -95,10 +130,7 @@ extension AudioDevice {
 
 extension AudioDevice {
   var imageURL: URL? {
-    var imageURLPropertyAddress = AudioObjectPropertyAddress(
-      mSelector: AudioObjectPropertySelector(kAudioDevicePropertyIcon),
-      mScope: AudioObjectPropertyScope(kAudioObjectPropertyScopeGlobal),
-      mElement: AudioObjectPropertyElement(kAudioObjectPropertyElementWildcard))
+    var imageURLPropertyAddress = AudioDeviceProperty.iconURL.address
 
     guard AudioObjectHasProperty(self.id, &imageURLPropertyAddress) else {
       print("image property not available")
