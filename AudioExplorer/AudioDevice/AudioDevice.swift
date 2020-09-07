@@ -13,41 +13,14 @@ import AudioToolbox
 public struct AudioDevice {
   let id: AudioDeviceID
 
-  private func property<T>(for description: AudioDevicePropertyDescription<T>) -> T? where T: AnyObject {
-    var address = description.address
+  @Property(AudioDeviceProperty.name) var name: String?
+  @Property(AudioDeviceProperty.iconURL) var iconURL: URL?
 
-    guard AudioObjectHasProperty(id, &address) else {
-      print("property for address not available \(address)")
-      return nil
-    }
+  init(id: AudioDeviceID) {
+    self.id = id
 
-    var propertySize: UInt32 = 0
-    let sizeStatus = AudioObjectGetPropertyDataSize(
-      id,
-      &address,
-      0, nil,
-      &propertySize)
-
-    guard sizeStatus == kAudioHardwareNoError else {
-      print("unable to get size for address \(address)")
-      return nil
-    }
-
-    var typeSize = description.elementSize
-    var holder: Unmanaged<T>?
-    let accessStatus = AudioObjectGetPropertyData(
-      id,
-      &address,
-      0, nil,
-      &typeSize,
-      &holder)
-
-    guard accessStatus == kAudioHardwareNoError else {
-      print("unable to access address \(address)")
-      return nil
-    }
-
-    return holder?.takeRetainedValue() as T?
+    _name.id = id
+    _iconURL.id = id
   }
 }
 
@@ -97,11 +70,6 @@ extension AudioDevice {
 }
 
 extension AudioDevice {
-  var name: String? { property(for: AudioDeviceProperty.name) as String? }
-}
-
-extension AudioDevice {
-  var iconURL: URL? { property(for: AudioDeviceProperty.iconURL) as URL? }
   var icon: NSImage? {
     if let url = iconURL {
       return NSImage(contentsOf: url)
