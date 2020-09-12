@@ -7,9 +7,14 @@
 
 import CoreAudio
 
+protocol PropertyRawValuable {
+  associatedtype Value
+  var value: Value { get }
+}
+
 extension AudioDevice {
   enum Property {
-    struct Selector {
+    struct Selector: PropertyRawValuable {
       let value: AudioObjectPropertySelector
       private init(_ v: AudioObjectPropertySelector) {
         value = v
@@ -20,7 +25,7 @@ extension AudioDevice {
       static var streamConfiguration = Selector(kAudioDevicePropertyStreamConfiguration)
     }
 
-    struct Scope {
+    struct Scope: PropertyRawValuable {
       let value: AudioObjectPropertyScope
       private init(_ v: AudioObjectPropertyScope) {
         value = v
@@ -31,7 +36,7 @@ extension AudioDevice {
       static var output = Scope(kAudioObjectPropertyScopeOutput)
     }
 
-    struct Element {
+    struct Element: PropertyRawValuable {
       let value: AudioObjectPropertyElement
       private init(_ v: AudioObjectPropertyElement) {
         value = v
