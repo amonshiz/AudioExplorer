@@ -17,6 +17,7 @@
 		DAB295AD250401060018D9BC /* AudioExplorerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB295AC250401060018D9BC /* AudioExplorerUITests.swift */; };
 		DAB295BC250401340018D9BC /* AudioDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB295BB250401340018D9BC /* AudioDevice.swift */; };
 		DAB295BE250401720018D9BC /* AudioDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB295BD250401720018D9BC /* AudioDeviceManager.swift */; };
+		DAEE8607250D440700F90E2A /* AudioDevicePropertyDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE8606250D440700F90E2A /* AudioDevicePropertyDescriptionTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		DAB295AE250401060018D9BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAB295BB250401340018D9BC /* AudioDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDevice.swift; sourceTree = "<group>"; };
 		DAB295BD250401720018D9BC /* AudioDeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDeviceManager.swift; sourceTree = "<group>"; };
+		DAEE8606250D440700F90E2A /* AudioDevicePropertyDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDevicePropertyDescriptionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 			children = (
 				DAB295A1250401060018D9BC /* AudioExplorerTests.swift */,
 				DAB295A3250401060018D9BC /* Info.plist */,
+				DAEE8606250D440700F90E2A /* AudioDevicePropertyDescriptionTests.swift */,
 			);
 			path = AudioExplorerTests;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAEE8607250D440700F90E2A /* AudioDevicePropertyDescriptionTests.swift in Sources */,
 				DAB295A2250401060018D9BC /* AudioExplorerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
