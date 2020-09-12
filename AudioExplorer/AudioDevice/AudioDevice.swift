@@ -13,8 +13,8 @@ import AudioToolbox
 public struct AudioDevice {
   let id: AudioDeviceID
 
-  @Property(.name) var name: String?
-  @Property(.iconURL) var iconURL: URL?
+  @DeviceProperty(.name) var name: String?
+  @DeviceProperty(.iconURL) var iconURL: URL?
 
   init(id: AudioDeviceID) {
     self.id = id

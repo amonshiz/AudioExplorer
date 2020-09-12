@@ -8,7 +8,7 @@
 import Foundation
 import CoreAudio
 
-@propertyWrapper struct Property<Base: AnyObject, Output> {
+@propertyWrapper struct DeviceProperty<Base: AnyObject, Output> {
   var id: AudioObjectID = 0
   private var description: AudioDevicePropertyDescription<Base>
 
