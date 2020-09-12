@@ -13,8 +13,8 @@ import AudioToolbox
 public struct AudioDevice {
   let id: AudioDeviceID
 
-  @Property(AudioDeviceProperty.name) var name: String?
-  @Property(AudioDeviceProperty.iconURL) var iconURL: URL?
+  @Property(.name) var name: String?
+  @Property(.iconURL) var iconURL: URL?
 
   init(id: AudioDeviceID) {
     self.id = id
@@ -65,8 +65,8 @@ extension AudioDevice {
     return false
   }
 
-  var input: Bool { supports(configuration: AudioDeviceProperty.StreamConfiguration.input) }
-  var output: Bool { supports(configuration: AudioDeviceProperty.StreamConfiguration.output) }
+  var input: Bool { supports(configuration: AudioDevicePropertyDescription.StreamConfiguration.input) }
+  var output: Bool { supports(configuration: AudioDevicePropertyDescription.StreamConfiguration.output) }
 }
 
 extension AudioDevice {

@@ -27,17 +27,21 @@ struct AudioDevicePropertyDescription<Element> {
   }
 }
 
-enum AudioDeviceProperty {
-  static var name = AudioDevicePropertyDescription<CFString>(
+extension AudioDevicePropertyDescription where Element == CFString {
+  static var name = AudioDevicePropertyDescription(
     selector: kAudioDevicePropertyDeviceNameCFString,
     scope: kAudioObjectPropertyScopeGlobal,
     element: kAudioObjectPropertyElementWildcard)
+}
 
-  static var iconURL = AudioDevicePropertyDescription<CFURL>(
+extension AudioDevicePropertyDescription where Element == CFURL {
+  static var iconURL = AudioDevicePropertyDescription(
     selector: kAudioDevicePropertyIcon,
     scope: kAudioObjectPropertyScopeGlobal,
     element: kAudioObjectPropertyElementWildcard)
+}
 
+extension AudioDevicePropertyDescription where Element == UnsafeMutableAudioBufferListPointer {
   enum StreamConfiguration {
     static var input = AudioDevicePropertyDescription<UnsafeMutableAudioBufferListPointer>(
       selector: kAudioDevicePropertyStreamConfiguration,
