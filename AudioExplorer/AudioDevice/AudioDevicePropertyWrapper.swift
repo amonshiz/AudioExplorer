@@ -23,7 +23,7 @@ internal struct PropertyProviderFunctions {
 }
 
 
-@propertyWrapper struct DeviceProperty<Base: AnyObject, Output> {
+@propertyWrapper struct DeviceProperty<Base, Output> {
 
   var id: AudioObjectID = 0
   private let description: AudioDevicePropertyDescription<Base>
@@ -54,25 +54,23 @@ internal struct PropertyProviderFunctions {
         return nil
       }
 
+      let propertyCount = propertySize / description.elementSize
       var typeSize = description.elementSize
-      var holder: Unmanaged<Base>?
+      let holder = UnsafeMutablePointer<Base>.allocate(capacity: Int(propertyCount))
       let accessStatus = providers.getData(
         id,
         &address,
         0, nil,
         &typeSize,
-        &holder)
+        holder)
 
       guard accessStatus == providers.noErrorValue else {
         print("unable to access address \(address)")
         return nil
       }
 
-      if let h = holder?.takeRetainedValue() {
-        return h as? Output
-      }
-      return nil
-
+      let hPointee = holder.pointee
+      return hPointee as? Output
     }
   }
 }

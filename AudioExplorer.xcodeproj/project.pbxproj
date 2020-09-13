@@ -18,6 +18,7 @@
 		DAB295BC250401340018D9BC /* AudioDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB295BB250401340018D9BC /* AudioDevice.swift */; };
 		DAB295BE250401720018D9BC /* AudioDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB295BD250401720018D9BC /* AudioDeviceManager.swift */; };
 		DAEE8607250D440700F90E2A /* AudioDevicePropertyDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE8606250D440700F90E2A /* AudioDevicePropertyDescriptionTests.swift */; };
+		DAEE8609250D4AE100F90E2A /* AudioDevicePropertyWrapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE8608250D4AE100F90E2A /* AudioDevicePropertyWrapperTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		DAB295BB250401340018D9BC /* AudioDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDevice.swift; sourceTree = "<group>"; };
 		DAB295BD250401720018D9BC /* AudioDeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDeviceManager.swift; sourceTree = "<group>"; };
 		DAEE8606250D440700F90E2A /* AudioDevicePropertyDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDevicePropertyDescriptionTests.swift; sourceTree = "<group>"; };
+		DAEE8608250D4AE100F90E2A /* AudioDevicePropertyWrapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDevicePropertyWrapperTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				DAB295A1250401060018D9BC /* AudioExplorerTests.swift */,
 				DAB295A3250401060018D9BC /* Info.plist */,
 				DAEE8606250D440700F90E2A /* AudioDevicePropertyDescriptionTests.swift */,
+				DAEE8608250D4AE100F90E2A /* AudioDevicePropertyWrapperTests.swift */,
 			);
 			path = AudioExplorerTests;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 			files = (
 				DAEE8607250D440700F90E2A /* AudioDevicePropertyDescriptionTests.swift in Sources */,
 				DAB295A2250401060018D9BC /* AudioExplorerTests.swift in Sources */,
+				DAEE8609250D4AE100F90E2A /* AudioDevicePropertyWrapperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

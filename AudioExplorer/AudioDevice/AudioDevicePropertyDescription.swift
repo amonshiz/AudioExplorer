@@ -16,7 +16,7 @@ extension AudioDevice {
   enum Property {
     struct Selector: PropertyRawValuable {
       let value: AudioObjectPropertySelector
-      private init(_ v: AudioObjectPropertySelector) {
+      internal init(_ v: AudioObjectPropertySelector) {
         value = v
       }
 
@@ -27,7 +27,7 @@ extension AudioDevice {
 
     struct Scope: PropertyRawValuable {
       let value: AudioObjectPropertyScope
-      private init(_ v: AudioObjectPropertyScope) {
+      internal init(_ v: AudioObjectPropertyScope) {
         value = v
       }
 
@@ -38,7 +38,7 @@ extension AudioDevice {
 
     struct Element: PropertyRawValuable {
       let value: AudioObjectPropertyElement
-      private init(_ v: AudioObjectPropertyElement) {
+      internal init(_ v: AudioObjectPropertyElement) {
         value = v
       }
 
@@ -54,7 +54,7 @@ struct AudioDevicePropertyDescription<Element> {
   let elementType: Element.Type
   let elementSize: UInt32
 
-  fileprivate init(selector se: AudioDevice.Property.Selector, scope sc: AudioDevice.Property.Scope, element el: AudioDevice.Property.Element) {
+  internal init(selector se: AudioDevice.Property.Selector, scope sc: AudioDevice.Property.Scope, element el: AudioDevice.Property.Element) {
     selector = se
     scope = sc
     element = el

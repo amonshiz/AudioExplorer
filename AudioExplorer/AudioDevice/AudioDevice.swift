@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AppKit
 import CoreAudio
 import CoreAudioTypes
 import AudioToolbox
