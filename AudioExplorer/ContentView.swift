@@ -11,21 +11,7 @@ struct ContentView: View {
   var body: some View {
     let devices = AudioDeviceManager.shared.allDevices
 
-    ForEach(devices.indices) { index in
-      VStack {
-        Text("\(devices[index].id)")
-        Text("\(devices[index].name ?? "MISSING")")
-        if let icon = devices[index].icon {
-          Image(nsImage: icon)
-        }
-        if devices[index].input {
-          Text("Has Input")
-        }
-        if devices[index].output {
-          Text("Has Output")
-        }
-      }
-    }
+    DevicePicker(availableDevices: devices)
   }
 }
 

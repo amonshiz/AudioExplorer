@@ -12,7 +12,7 @@ import CoreAudioTypes
 import AudioToolbox
 
 public struct AudioDevice {
-  let id: AudioDeviceID
+  public let id: AudioDeviceID
 
   @DeviceProperty(.name) var name: String?
   @DeviceProperty(.iconURL) var iconURL: URL?
@@ -22,6 +22,21 @@ public struct AudioDevice {
 
     _name.id = id
     _iconURL.id = id
+  }
+}
+
+extension AudioDevice: Identifiable {}
+
+extension AudioDevice: Hashable {
+  public static func == (lhs: AudioDevice, rhs: AudioDevice) -> Bool {
+    lhs.id == rhs.id
+  }
+
+  public var hashValue: Int {
+    Int(id)
+  }
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
   }
 }
 

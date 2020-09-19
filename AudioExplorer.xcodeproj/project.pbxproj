@@ -17,6 +17,7 @@
 		DAB295AD250401060018D9BC /* AudioExplorerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB295AC250401060018D9BC /* AudioExplorerUITests.swift */; };
 		DAB295BC250401340018D9BC /* AudioDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB295BB250401340018D9BC /* AudioDevice.swift */; };
 		DAB295BE250401720018D9BC /* AudioDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB295BD250401720018D9BC /* AudioDeviceManager.swift */; };
+		DAD45DEC251682DA00B71195 /* DevicePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD45DEB251682DA00B71195 /* DevicePicker.swift */; };
 		DAEE8607250D440700F90E2A /* AudioDevicePropertyDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE8606250D440700F90E2A /* AudioDevicePropertyDescriptionTests.swift */; };
 		DAEE8609250D4AE100F90E2A /* AudioDevicePropertyWrapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE8608250D4AE100F90E2A /* AudioDevicePropertyWrapperTests.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		DAB295AE250401060018D9BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAB295BB250401340018D9BC /* AudioDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDevice.swift; sourceTree = "<group>"; };
 		DAB295BD250401720018D9BC /* AudioDeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDeviceManager.swift; sourceTree = "<group>"; };
+		DAD45DEB251682DA00B71195 /* DevicePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicePicker.swift; sourceTree = "<group>"; };
 		DAEE8606250D440700F90E2A /* AudioDevicePropertyDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDevicePropertyDescriptionTests.swift; sourceTree = "<group>"; };
 		DAEE8608250D4AE100F90E2A /* AudioDevicePropertyWrapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDevicePropertyWrapperTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,6 +110,7 @@
 		DAB2958D250401050018D9BC /* AudioExplorer */ = {
 			isa = PBXGroup;
 			children = (
+				DAD45DEA251682C800B71195 /* Views */,
 				DAB295BA2504012A0018D9BC /* AudioDevice */,
 				DAB2958E250401050018D9BC /* AudioExplorerApp.swift */,
 				DAB29590250401050018D9BC /* ContentView.swift */,
@@ -156,6 +159,14 @@
 				DA1A26402506B49400616DB8 /* AudioDevicePropertyWrapper.swift */,
 			);
 			path = AudioDevice;
+			sourceTree = "<group>";
+		};
+		DAD45DEA251682C800B71195 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DAD45DEB251682DA00B71195 /* DevicePicker.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,6 +300,7 @@
 			files = (
 				DA1A26412506B49400616DB8 /* AudioDevicePropertyWrapper.swift in Sources */,
 				DA1A263F2506B43500616DB8 /* AudioDevicePropertyDescription.swift in Sources */,
+				DAD45DEC251682DA00B71195 /* DevicePicker.swift in Sources */,
 				DAB295BE250401720018D9BC /* AudioDeviceManager.swift in Sources */,
 				DAB29591250401050018D9BC /* ContentView.swift in Sources */,
 				DAB2958F250401050018D9BC /* AudioExplorerApp.swift in Sources */,
