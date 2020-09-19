@@ -7,6 +7,15 @@
 
 import Foundation
 import CoreAudio
+import OSLog
+
+extension AudioObjectPropertyAddress: CustomStringConvertible {
+  public var description: String {
+    return "<\(self.mSelector) : \(self.mScope) : \(self.mElement)>"
+  }
+
+
+}
 
 internal struct PropertyProviderFunctions {
   let hasCheck: (AudioObjectID, UnsafePointer<AudioObjectPropertyAddress>) -> Bool
@@ -29,6 +38,8 @@ internal struct PropertyProviderFunctions {
   private let description: AudioDevicePropertyDescription<Base>
   private let providers: PropertyProviderFunctions
 
+  private let logger = Logger(subsystem: "com.amonshiz.audioexplorer.deviceproperty", category: "error")
+
   init(_ description: AudioDevicePropertyDescription<Base>, providers functions: PropertyProviderFunctions = .standard) {
     self.description = description
     self.providers = functions
@@ -38,7 +49,7 @@ internal struct PropertyProviderFunctions {
     get {
       var address = description.address
       guard providers.hasCheck(id, &address) else {
-        print("property for address not available \(address)")
+        logger.error("property for address not available \(address, privacy: .public)")
         return nil
       }
 
@@ -50,7 +61,7 @@ internal struct PropertyProviderFunctions {
         &propertySize)
 
       guard sizeStatus == providers.noErrorValue else {
-        print("unable to get size for address \(address)")
+        logger.error("unable to get size for address \(address, privacy: .public)")
         return nil
       }
 
@@ -65,7 +76,7 @@ internal struct PropertyProviderFunctions {
         holder)
 
       guard accessStatus == providers.noErrorValue else {
-        print("unable to access address \(address)")
+        logger.error("unable to access address \(address, privacy: .public)")
         return nil
       }
 
