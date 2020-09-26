@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct AudioExplorerApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+  var body: some Scene {
+    WindowGroup {
+//      ContentView()
+      BasicRoutingView(allDevices: AudioDeviceManager.shared.allDevices)
     }
+  }
 }

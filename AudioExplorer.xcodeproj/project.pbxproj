@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DA1A263F2506B43500616DB8 /* AudioDevicePropertyDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1A263E2506B43500616DB8 /* AudioDevicePropertyDescription.swift */; };
 		DA1A26412506B49400616DB8 /* AudioDevicePropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1A26402506B49400616DB8 /* AudioDevicePropertyWrapper.swift */; };
+		DA2AE00F251FB40E0068B01B /* BasicRoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2AE00E251FB40D0068B01B /* BasicRoutingView.swift */; };
 		DAB2958F250401050018D9BC /* AudioExplorerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB2958E250401050018D9BC /* AudioExplorerApp.swift */; };
 		DAB29591250401050018D9BC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB29590250401050018D9BC /* ContentView.swift */; };
 		DAB29593250401060018D9BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAB29592250401060018D9BC /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		DA1A263E2506B43500616DB8 /* AudioDevicePropertyDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDevicePropertyDescription.swift; sourceTree = "<group>"; };
 		DA1A26402506B49400616DB8 /* AudioDevicePropertyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDevicePropertyWrapper.swift; sourceTree = "<group>"; };
+		DA2AE00E251FB40D0068B01B /* BasicRoutingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicRoutingView.swift; sourceTree = "<group>"; };
 		DAB2958B250401050018D9BC /* AudioExplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioExplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAB2958E250401050018D9BC /* AudioExplorerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioExplorerApp.swift; sourceTree = "<group>"; };
 		DAB29590250401050018D9BC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				DAD45DEB251682DA00B71195 /* DevicePicker.swift */,
+				DA2AE00E251FB40D0068B01B /* BasicRoutingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				DAB295BE250401720018D9BC /* AudioDeviceManager.swift in Sources */,
 				DAB29591250401050018D9BC /* ContentView.swift in Sources */,
 				DAB2958F250401050018D9BC /* AudioExplorerApp.swift in Sources */,
+				DA2AE00F251FB40E0068B01B /* BasicRoutingView.swift in Sources */,
 				DAB295BC250401340018D9BC /* AudioDevice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
