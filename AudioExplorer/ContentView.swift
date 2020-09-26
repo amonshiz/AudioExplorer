@@ -11,7 +11,7 @@ struct ContentView: View {
   var body: some View {
     let devices = AudioDeviceManager.shared.allDevices
 
-    DevicePicker(availableDevices: devices)
+    DevicePicker(availableDevices: devices, label: Text("All devices"))
   }
 }
 
