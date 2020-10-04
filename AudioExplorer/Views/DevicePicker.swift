@@ -12,14 +12,14 @@ struct DevicePicker<Label>: View where Label: View {
   let label: Label
   private let debugging: Bool
 
-  @State var selectedDevice: AudioDevice
+  @Binding var selectedDevice: AudioDevice
 
-  init(availableDevices: [AudioDevice], preselected: AudioDevice? = nil, label: Label, debugging: Bool = false) {
+  init(availableDevices: [AudioDevice], preselected: Binding<AudioDevice>, label: Label, debugging: Bool = false) {
     assert(availableDevices.count > 0)
     self.debugging = debugging
     self.label = label
     self.availableDevices = availableDevices
-    self._selectedDevice = .init(wrappedValue: preselected ?? availableDevices.first!)
+    _selectedDevice = preselected
   }
 
   var body: some View {
@@ -41,6 +41,10 @@ struct DevicePicker_Previews: PreviewProvider {
   static var previews: some View {
     DevicePicker(availableDevices: [
       AudioDevice(id: 1)
-    ], label: Text("Preview"))
+    ],
+    preselected: Binding(get: {
+      AudioDevice(id: 1)
+    }, set: {_ in}),
+    label: Text("Preview"))
   }
 }

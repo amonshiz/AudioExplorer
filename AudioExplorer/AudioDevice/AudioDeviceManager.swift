@@ -12,15 +12,15 @@ import AudioToolbox
 public protocol DeviceProvider {
   var allDevices: [AudioDevice] { get }
 
-  var defaultInput: AudioDevice? { get }
-  var defaultOutput: AudioDevice? { get }
+  var defaultInput: AudioDevice { get set }
+  var defaultOutput: AudioDevice { get set }
 }
 
 public class AudioDeviceManager {
   public static let shared = AudioDeviceManager()
 
-  @DeviceProperty(.defaultInput) private var defaultInputId: AudioDeviceID?
-  @DeviceProperty(.defaultOutput) private var defaultOutputId: AudioDeviceID?
+  @MutableDeviceProperty(.defaultInput) private var defaultInputId: AudioDeviceID?
+  @MutableDeviceProperty(.defaultOutput) private var defaultOutputId: AudioDeviceID?
 
   private init() {
     _defaultInputId.id = AudioDeviceID(kAudioObjectSystemObject)
@@ -66,14 +66,26 @@ extension AudioDeviceManager: DeviceProvider {
     }
   }
 
-  public var defaultInput: AudioDevice? {
-    guard let id = self.defaultInputId else { return nil }
-    return AudioDevice(id: id)
+  public var defaultInput: AudioDevice {
+    get {
+      guard let id = self.defaultInputId else { fatalError("No default input found") }
+      return AudioDevice(id: id)
+    }
+
+    set {
+      self.defaultInputId = newValue.id
+    }
   }
 
-  public var defaultOutput: AudioDevice? {
-    guard let id = self.defaultOutputId else { return nil }
-    return AudioDevice(id: id)
+  public var defaultOutput: AudioDevice {
+    get {
+      guard let id = self.defaultOutputId else { fatalError("No default output found") }
+      return AudioDevice(id: id)
+    }
+
+    set {
+      self.defaultOutputId = newValue.id
+    }
   }
 }
 
@@ -90,8 +102,8 @@ struct ADMPreviewProvider: PreviewProvider {
         Text("\(devices[$0].id)")
       }
 
-      Text("default input \(m.defaultInput?.id ?? 0)")
-      Text("default output \(m.defaultOutput?.id ?? 0)")
+      Text("default input \(m.defaultInput.id ?? 0)")
+      Text("default output \(m.defaultOutput.id ?? 0)")
     }
   }
 }
