@@ -12,7 +12,10 @@ struct AudioExplorerApp: App {
   var body: some Scene {
     WindowGroup {
 //      ContentView()
-      BasicRoutingView(allDevices: AudioDeviceManager.shared.allDevices)
+      BasicRoutingView(
+        allDevices: AudioDeviceManager.shared.allDevices,
+        currentInput: AudioDeviceManager.shared.defaultInput,
+        currentOutput: AudioDeviceManager.shared.defaultOutput)
     }
   }
 }
