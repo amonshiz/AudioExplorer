@@ -11,10 +11,21 @@ import AudioToolbox
 
 public protocol DeviceProvider {
   var allDevices: [AudioDevice] { get }
+
+  var defaultInput: AudioDevice? { get }
+  var defaultOutput: AudioDevice? { get }
 }
 
 public class AudioDeviceManager {
   public static let shared = AudioDeviceManager()
+
+  @DeviceProperty(.defaultInput) private var defaultInputId: AudioDeviceID?
+  @DeviceProperty(.defaultOutput) private var defaultOutputId: AudioDeviceID?
+
+  private init() {
+    _defaultInputId.id = AudioDeviceID(kAudioObjectSystemObject)
+    _defaultOutputId.id = AudioDeviceID(kAudioObjectSystemObject)
+  }
 }
 
 extension AudioDeviceManager: DeviceProvider {
@@ -54,6 +65,16 @@ extension AudioDeviceManager: DeviceProvider {
       return devices
     }
   }
+
+  public var defaultInput: AudioDevice? {
+    guard let id = self.defaultInputId else { return nil }
+    return AudioDevice(id: id)
+  }
+
+  public var defaultOutput: AudioDevice? {
+    guard let id = self.defaultOutputId else { return nil }
+    return AudioDevice(id: id)
+  }
 }
 
 #if DEBUG
@@ -68,6 +89,9 @@ struct ADMPreviewProvider: PreviewProvider {
       ForEach(devices.indices) {
         Text("\(devices[$0].id)")
       }
+
+      Text("default input \(m.defaultInput?.id ?? 0)")
+      Text("default output \(m.defaultOutput?.id ?? 0)")
     }
   }
 }
