@@ -23,6 +23,9 @@ extension AudioDevice {
       static var nameCFString = Selector(kAudioDevicePropertyDeviceNameCFString)
       static var icon = Selector(kAudioDevicePropertyIcon)
       static var streamConfiguration = Selector(kAudioDevicePropertyStreamConfiguration)
+
+      static var defaultInput = Selector(kAudioHardwarePropertyDefaultInputDevice)
+      static var defaultOutput = Selector(kAudioHardwarePropertyDefaultOutputDevice)
     }
 
     struct Scope: PropertyRawValuable {
@@ -65,6 +68,18 @@ struct AudioDevicePropertyDescription<Element> {
   var address: AudioObjectPropertyAddress {
     AudioObjectPropertyAddress(mSelector: selector.value, mScope: scope.value, mElement: element.value)
   }
+}
+
+extension AudioDevicePropertyDescription where Element == AudioDeviceID {
+  static var defaultInput = AudioDevicePropertyDescription(
+    selector: .defaultInput,
+    scope: .global,
+    element: .wildcard)
+
+  static var defaultOutput = AudioDevicePropertyDescription(
+    selector: .defaultOutput,
+    scope: .global,
+    element: .wildcard)
 }
 
 extension AudioDevicePropertyDescription where Element == CFString {
