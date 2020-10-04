@@ -32,9 +32,6 @@ extension AudioDevice: Hashable {
     lhs.id == rhs.id
   }
 
-  public var hashValue: Int {
-    Int(id)
-  }
   public func hash(into hasher: inout Hasher) {
     hasher.combine(id)
   }
