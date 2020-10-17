@@ -70,13 +70,12 @@ internal struct PropertyProviderFunctions {
       }
 
       let propertyCount = propertySize / description.elementSize
-      var typeSize = description.elementSize
       let holder = UnsafeMutablePointer<Base>.allocate(capacity: Int(propertyCount))
       let accessStatus = providers.getData(
         id,
         &address,
         0, nil,
-        &typeSize,
+        &propertySize,
         holder)
 
       guard accessStatus == providers.noErrorValue else {

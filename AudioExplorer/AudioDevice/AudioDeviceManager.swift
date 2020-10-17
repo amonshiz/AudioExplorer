@@ -23,8 +23,9 @@ public class AudioDeviceManager {
   @MutableDeviceProperty(.defaultOutput) private var defaultOutputId: AudioDeviceID?
 
   private init() {
-    _defaultInputId.id = AudioDeviceID(kAudioObjectSystemObject)
-    _defaultOutputId.id = AudioDeviceID(kAudioObjectSystemObject)
+    let systemObject = AudioDeviceID(kAudioObjectSystemObject)
+    _defaultInputId.id = systemObject
+    _defaultOutputId.id = systemObject
   }
 }
 
