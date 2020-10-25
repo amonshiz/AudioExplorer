@@ -22,6 +22,10 @@ class AudioDevicePropertyWrapperTests: XCTestCase {
     }, getData: { (id, address, qualifierDataSize, qualifierData, dataSize, data) -> OSStatus in
       data.initializeMemory(as: CFString.self, from: &expectedString, count: 1)
       return 0
+    }, isSettable: {
+      (id, address, out) -> OSStatus in return 0
+    }, setData: { (id, address, qualifierDataSize, qualifierData, dataSize, data) -> OSStatus in
+      return 0
     }, noErrorValue: 0)
 
     let prop: DeviceProperty<CFString, Int> = DeviceProperty(.name, providers: mockFunctions)
@@ -41,6 +45,10 @@ class AudioDevicePropertyWrapperTests: XCTestCase {
       0
     }, getData: { (id, address, qualifierDataSize, qualifierData, dataSize, data) -> OSStatus in
       0
+    }, isSettable: {
+      (id, address, out) -> OSStatus in return 0
+    }, setData: { (id, address, qualifierDataSize, qualifierData, dataSize, data) -> OSStatus in
+      return 0
     }, noErrorValue: 0)
 
     let prop: DeviceProperty<CFString, Int> = DeviceProperty(.name, providers: mockFunctions)
@@ -65,6 +73,10 @@ class AudioDevicePropertyWrapperTests: XCTestCase {
     }, getData: { (id, address, qualifierDataSize, qualifierData, dataSize, data) -> OSStatus in
       data.initializeMemory(as: CFString.self, from: &expectedString, count: 1)
       return 0
+    }, isSettable: {
+      (id, address, out) -> OSStatus in return 0
+    }, setData: { (id, address, qualifierDataSize, qualifierData, dataSize, data) -> OSStatus in
+      return 0
     }, noErrorValue: 0)
 
     let prop: DeviceProperty<CFString, Int> = DeviceProperty(.name, providers: mockFunctions)
@@ -85,6 +97,10 @@ class AudioDevicePropertyWrapperTests: XCTestCase {
       return 1
     }, getData: { (id, address, qualifierDataSize, qualifierData, dataSize, data) -> OSStatus in
       data.initializeMemory(as: CFString.self, from: &expectedString, count: 1)
+      return 0
+    }, isSettable: {
+      (id, address, out) -> OSStatus in return 0
+    }, setData: { (id, address, qualifierDataSize, qualifierData, dataSize, data) -> OSStatus in
       return 0
     }, noErrorValue: 0)
 
@@ -113,6 +129,10 @@ class AudioDevicePropertyWrapperTests: XCTestCase {
       data.initializeMemory(as: CFString.self, from: &expectedString, count: 1)
       getDataExpectation.fulfill()
       return 0
+    }, isSettable: {
+      (id, address, out) -> OSStatus in return 0
+    }, setData: { (id, address, qualifierDataSize, qualifierData, dataSize, data) -> OSStatus in
+      return 0
     }, noErrorValue: 0)
 
     let prop: DeviceProperty<CFString, Int> = DeviceProperty(.name, providers: mockFunctions)
@@ -134,6 +154,10 @@ class AudioDevicePropertyWrapperTests: XCTestCase {
       data.initializeMemory(as: CFString.self, from: &expectedString, count: 1)
       getDataExpectation.fulfill()
       return 1
+    }, isSettable: {
+      (id, address, out) -> OSStatus in return 0
+    }, setData: { (id, address, qualifierDataSize, qualifierData, dataSize, data) -> OSStatus in
+      return 0
     }, noErrorValue: 0)
 
     let prop: DeviceProperty<CFString, Int> = DeviceProperty(.name, providers: mockFunctions)
@@ -154,12 +178,16 @@ class AudioDevicePropertyWrapperTests: XCTestCase {
     let mockFunctions = PropertyProviderFunctions(hasCheck: { (id, address) -> Bool in
       true
     }, dataSize: { (id, address, qualifierDataSize, qualifierData, dataSize) -> OSStatus in
-      dataSize.initialize(repeating: 1, count: 1)
+      dataSize.initialize(repeating: UInt32(MemoryLayout<Int>.size), count: 1)
       return 0
     }, getData: { (id, address, qualifierDataSize, qualifierData, dataSize, data) -> OSStatus in
       XCTAssert(dataSize.pointee == MemoryLayout<Int>.size)
       data.initializeMemory(as: Int.self, repeating: 1, count: 1)
       getDataExpectation.fulfill()
+      return 0
+    }, isSettable: {
+      (id, address, out) -> OSStatus in return 0
+    }, setData: { (id, address, qualifierDataSize, qualifierData, dataSize, data) -> OSStatus in
       return 0
     }, noErrorValue: 0)
 
@@ -168,5 +196,4 @@ class AudioDevicePropertyWrapperTests: XCTestCase {
     XCTAssertEqual(wrapped, 1)
     wait(for: [getDataExpectation], timeout: 2)
   }
-
 }
