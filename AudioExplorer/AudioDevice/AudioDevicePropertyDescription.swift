@@ -26,6 +26,8 @@ extension AudioDevice {
 
       static var defaultInput = Selector(kAudioHardwarePropertyDefaultInputDevice)
       static var defaultOutput = Selector(kAudioHardwarePropertyDefaultOutputDevice)
+
+      static var allDevices = Selector(kAudioHardwarePropertyDevices)
     }
 
     struct Scope: PropertyRawValuable {
@@ -78,6 +80,11 @@ extension AudioDevicePropertyDescription where Element == AudioDeviceID {
 
   static var defaultOutput = AudioDevicePropertyDescription(
     selector: .defaultOutput,
+    scope: .global,
+    element: .wildcard)
+
+  static var allDevices = AudioDevicePropertyDescription(
+    selector: .allDevices,
     scope: .global,
     element: .wildcard)
 }

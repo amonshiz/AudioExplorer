@@ -19,11 +19,13 @@ public protocol DeviceProvider {
 public class AudioDeviceManager {
   public static let shared = AudioDeviceManager()
 
+  @DeviceProperty(.allDevices, as: .array()) private var allDeviceIds: [AudioDeviceID]?
   @MutableDeviceProperty(.defaultInput) private var defaultInputId: AudioDeviceID?
   @MutableDeviceProperty(.defaultOutput) private var defaultOutputId: AudioDeviceID?
 
   private init() {
     let systemObject = AudioDeviceID(kAudioObjectSystemObject)
+    _allDeviceIds.id = systemObject
     _defaultInputId.id = systemObject
     _defaultOutputId.id = systemObject
   }
@@ -32,38 +34,7 @@ public class AudioDeviceManager {
 extension AudioDeviceManager: DeviceProvider {
   public var allDevices: [AudioDevice] {
     get {
-      var devicesPropertyAddress = AudioObjectPropertyAddress(
-        mSelector: kAudioHardwarePropertyDevices,
-        mScope: kAudioObjectPropertyScopeGlobal,
-        mElement: kAudioObjectPropertyElementMaster)
-
-      var numberOfDevicesSize: UInt32 = 0
-      let devicesSizeStatus = AudioObjectGetPropertyDataSize(
-        AudioObjectID(kAudioObjectSystemObject),
-        &devicesPropertyAddress,
-        0, nil, /* NO IDEA */
-        &numberOfDevicesSize)
-
-      guard devicesSizeStatus == kAudioServicesNoError else {
-        fatalError("unable to get size of all device ids: \(devicesSizeStatus)")
-      }
-
-      let numberOfDevices = Int(numberOfDevicesSize / UInt32(MemoryLayout<AudioDeviceID>.size))
-      var rawDeviceIDs = Array(repeating: UInt32(0), count: numberOfDevices)
-
-      let deviceIDsStatus = AudioObjectGetPropertyData(
-        AudioObjectID(kAudioObjectSystemObject),
-        &devicesPropertyAddress,
-        0, nil,
-        &numberOfDevicesSize,
-        &rawDeviceIDs)
-
-      guard deviceIDsStatus == kAudioServicesNoError else {
-        fatalError("unable to get device ids: \(deviceIDsStatus)")
-      }
-
-      let devices = rawDeviceIDs.map(AudioDevice.init(id:))
-      return devices
+      (allDeviceIds ?? [0]).compactMap(AudioDevice.init(id:))
     }
   }
 
@@ -103,8 +74,8 @@ struct ADMPreviewProvider: PreviewProvider {
         Text("\(devices[$0].id)")
       }
 
-      Text("default input \(m.defaultInput.id ?? 0)")
-      Text("default output \(m.defaultOutput.id ?? 0)")
+      Text("default input \(m.defaultInput.id)")
+      Text("default output \(m.defaultOutput.id)")
     }
   }
 }
