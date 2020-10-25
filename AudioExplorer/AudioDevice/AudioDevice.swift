@@ -72,7 +72,9 @@ extension AudioDevice {
     let bufferList = self.configuration(for: configuration)
     for index in 0 ..< bufferList.unsafeMutablePointer.pointee.mNumberBuffers {
       let buffer = bufferList[Int(index)]
-      return buffer.mNumberChannels > 0
+      if buffer.mNumberChannels > 0 {
+        return true
+      }
     }
 
     return false
