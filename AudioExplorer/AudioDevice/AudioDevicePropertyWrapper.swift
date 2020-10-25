@@ -13,8 +13,6 @@ extension AudioObjectPropertyAddress: CustomStringConvertible {
   public var description: String {
     return "<\(self.mSelector) : \(self.mScope) : \(self.mElement)>"
   }
-
-
 }
 
 internal struct PropertyProviderFunctions {
@@ -35,14 +33,13 @@ internal struct PropertyProviderFunctions {
     noErrorValue: kAudioHardwareNoError)
 }
 
-
-@propertyWrapper struct DeviceProperty<Base, Output> {
+@propertyWrapper class DeviceProperty<Base, Output> {
 
   var id: AudioObjectID = 0
-  private let description: AudioDevicePropertyDescription<Base>
-  private let providers: PropertyProviderFunctions
+  internal let description: AudioDevicePropertyDescription<Base>
+  internal let providers: PropertyProviderFunctions
 
-  private let logger = Logger(subsystem: "com.amonshiz.audioexplorer.deviceproperty", category: "error")
+  internal let logger = Logger(subsystem: "com.amonshiz.audioexplorer.deviceproperty", category: "error")
 
   init(_ description: AudioDevicePropertyDescription<Base>, providers functions: PropertyProviderFunctions = .standard) {
     self.description = description
@@ -89,58 +86,10 @@ internal struct PropertyProviderFunctions {
   }
 }
 
-@propertyWrapper struct MutableDeviceProperty<Base, Output> {
+@propertyWrapper class MutableDeviceProperty<Base, Output>: DeviceProperty<Base, Output> {
 
-  var id: AudioObjectID = 0
-  private let description: AudioDevicePropertyDescription<Base>
-  private let providers: PropertyProviderFunctions
-
-  private let logger = Logger(subsystem: "com.amonshiz.audioexplorer.mutabledeviceproperty", category: "error")
-
-  init(_ description: AudioDevicePropertyDescription<Base>, providers functions: PropertyProviderFunctions = .standard) {
-    self.description = description
-    self.providers = functions
-  }
-
-  var wrappedValue: Output? {
-    get {
-      var address = description.address
-      guard providers.hasCheck(id, &address) else {
-        logger.error("property for address not available \(address, privacy: .public)")
-        return nil
-      }
-
-      var propertySize: UInt32 = 0
-      let sizeStatus = providers.dataSize(
-        id,
-        &address,
-        0, nil,
-        &propertySize)
-
-      guard sizeStatus == providers.noErrorValue else {
-        logger.error("unable to get size for address \(address, privacy: .public)")
-        return nil
-      }
-
-      let propertyCount = propertySize / description.elementSize
-      var typeSize = description.elementSize
-      let holder = UnsafeMutablePointer<Base>.allocate(capacity: Int(propertyCount))
-      let accessStatus = providers.getData(
-        id,
-        &address,
-        0, nil,
-        &typeSize,
-        holder)
-
-      guard accessStatus == providers.noErrorValue else {
-        logger.error("unable to access address \(address, privacy: .public)")
-        return nil
-      }
-
-      let hPointee = holder.pointee
-      return hPointee as? Output
-    }
-
+  override var wrappedValue: Output? {
+    get { super.wrappedValue }
     set {
       var address = description.address
       guard providers.hasCheck(id, &address) else {
