@@ -33,17 +33,50 @@ internal struct PropertyProviderFunctions {
     noErrorValue: kAudioHardwareNoError)
 }
 
+struct PropertyDataDecoder<Input, Output> {
+  private let impl: (UnsafeMutablePointer<Input>, Int) -> Output?
+
+  func decode(_ input: UnsafeMutablePointer<Input>, count: Int) -> Output? {
+    return impl(input, count)
+  }
+
+  static func single() -> PropertyDataDecoder<Input, Output> {
+    return PropertyDataDecoder { input, _ in
+      let pointee = input.pointee
+      return pointee as? Output
+    }
+  }
+
+  static func array() -> PropertyDataDecoder<Input, Output> where Output == Array<Input> {
+    return PropertyDataDecoder { input, capacity in
+      let pointer = UnsafeMutableRawPointer(input)
+      let bound = pointer.bindMemory(to: Output.Element.self, capacity: capacity)
+      return Array(UnsafeBufferPointer(start: bound, count: capacity))
+    }
+  }
+
+  func callAsFunction(input: UnsafeMutablePointer<Input>, count: Int) -> Output? {
+    return decode(input, count: count)
+  }
+}
+
 @propertyWrapper class DeviceProperty<Base, Output> {
 
   var id: AudioObjectID = 0
   internal let description: AudioDevicePropertyDescription<Base>
   internal let providers: PropertyProviderFunctions
+  internal let decoder: PropertyDataDecoder<Base, Output>
 
   internal let logger = Logger(subsystem: "com.amonshiz.audioexplorer.deviceproperty", category: "error")
 
-  init(_ description: AudioDevicePropertyDescription<Base>, providers functions: PropertyProviderFunctions = .standard) {
+  init(
+    _ description: AudioDevicePropertyDescription<Base>,
+    providers functions: PropertyProviderFunctions = .standard,
+    as decoder: PropertyDataDecoder<Base, Output> = .single()
+  ) {
     self.description = description
     self.providers = functions
+    self.decoder = decoder
   }
 
   var wrappedValue: Output? {
@@ -66,8 +99,8 @@ internal struct PropertyProviderFunctions {
         return nil
       }
 
-      let propertyCount = propertySize / description.elementSize
-      let holder = UnsafeMutablePointer<Base>.allocate(capacity: Int(propertyCount))
+      let propertyCount = Int(propertySize / description.elementSize)
+      let holder = UnsafeMutablePointer<Base>.allocate(capacity: propertyCount)
       let accessStatus = providers.getData(
         id,
         &address,
@@ -80,8 +113,7 @@ internal struct PropertyProviderFunctions {
         return nil
       }
 
-      let hPointee = holder.pointee
-      return hPointee as? Output
+      return decoder(input: holder, count: propertyCount)
     }
   }
 }
