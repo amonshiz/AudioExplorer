@@ -102,7 +102,7 @@ struct ADPreview: PreviewProvider {
   static var previews: some View {
     let devices = AudioDeviceManager.shared.allDevices
 
-    ForEach(devices.indices) { index in
+    ForEach(0..<1) { index in
       VStack {
         Text("\(devices[index].id)")
         Text("\(devices[index].name ?? "MISSING")")

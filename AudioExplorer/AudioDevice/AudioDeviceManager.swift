@@ -70,7 +70,7 @@ struct ADMPreviewProvider: PreviewProvider {
     let devices = m.allDevices
 
     VStack {
-      ForEach(devices.indices) {
+      ForEach(0..<1) {
         Text("\(devices[$0].id)")
       }
 
