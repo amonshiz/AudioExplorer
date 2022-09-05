@@ -7,15 +7,15 @@
 
 import CoreAudio
 
-protocol PropertyRawValuable {
-  associatedtype Value
-  var value: Value { get }
-}
-
 extension AudioDevice {
   enum Property {
-    struct Selector: PropertyRawValuable {
-      let value: AudioObjectPropertySelector
+    struct Selector: RawRepresentable {
+      var rawValue: AudioObjectPropertySelector { value }
+      init?(rawValue: AudioObjectPropertySelector) {
+        self.init(rawValue)
+      }
+
+      internal let value: RawValue
       internal init(_ v: AudioObjectPropertySelector) {
         value = v
       }
@@ -30,8 +30,13 @@ extension AudioDevice {
       static var allDevices = Selector(kAudioHardwarePropertyDevices)
     }
 
-    struct Scope: PropertyRawValuable {
-      let value: AudioObjectPropertyScope
+    struct Scope: RawRepresentable {
+      var rawValue: AudioObjectPropertyScope { value }
+      init?(rawValue: AudioObjectPropertyScope) {
+        self.init(rawValue)
+      }
+
+      internal let value: AudioObjectPropertyScope
       internal init(_ v: AudioObjectPropertyScope) {
         value = v
       }
@@ -41,8 +46,13 @@ extension AudioDevice {
       static var output = Scope(kAudioObjectPropertyScopeOutput)
     }
 
-    struct Element: PropertyRawValuable {
-      let value: AudioObjectPropertyElement
+    struct Element: RawRepresentable {
+      var rawValue: AudioObjectPropertyElement { value }
+      init?(rawValue: AudioObjectPropertyElement) {
+        self.init(rawValue)
+      }
+
+      internal let value: AudioObjectPropertyElement
       internal init(_ v: AudioObjectPropertyElement) {
         value = v
       }

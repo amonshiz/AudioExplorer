@@ -10,9 +10,9 @@ import CoreAudio
 @testable import AudioExplorer
 
 class AudioDevicePropertyDescriptionTests: XCTestCase {
-  private func validate<V: PropertyRawValuable,T>(pairs: [(V, T)]) where V.Value == T, T: Equatable {
+  private func validate<V: RawRepresentable,T>(pairs: [(V, T)]) where V.RawValue == T, T: Equatable {
     for pair in pairs {
-      XCTAssertEqual(pair.0.value, pair.1)
+      XCTAssertEqual(pair.0.rawValue, pair.1)
     }
   }
 
