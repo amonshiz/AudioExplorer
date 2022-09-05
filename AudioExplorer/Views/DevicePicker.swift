@@ -12,9 +12,9 @@ struct DevicePicker<Label>: View where Label: View {
   let label: Label
   private let debugging: Bool
 
-  @Binding var selectedDevice: AudioDevice
+  @Binding var selectedDevice: AudioDevice.ID
 
-  init(availableDevices: [AudioDevice], preselected: Binding<AudioDevice>, label: Label, debugging: Bool = false) {
+  init(availableDevices: [AudioDevice], preselected: Binding<AudioDevice.ID>, label: Label, debugging: Bool = true) {
     assert(availableDevices.count > 0)
     self.debugging = debugging
     self.label = label
@@ -26,12 +26,12 @@ struct DevicePicker<Label>: View where Label: View {
     VStack {
       Picker(selection: $selectedDevice, label: label) {
         ForEach(availableDevices) { d in
-          Text(d.name ?? "NO NAME").tag(d)
+          Text(d.name ?? "NO NAME").tag(d.id)
         }
       }
       .pickerStyle(MenuPickerStyle())
       if debugging {
-        Text("Selected by device: \(selectedDevice.name ?? "")")
+        Text("Selected by device: \(availableDevices.first(where: { $0.id == selectedDevice })?.name ?? "")")
       }
     }
   }
@@ -39,12 +39,8 @@ struct DevicePicker<Label>: View where Label: View {
 
 struct DevicePicker_Previews: PreviewProvider {
   static var previews: some View {
-    DevicePicker(availableDevices: [
-      AudioDevice(id: 1)
-    ],
-    preselected: Binding(get: {
-      AudioDevice(id: 1)
-    }, set: {_ in}),
+    DevicePicker(availableDevices: [AudioDevice(id: 1)],
+    preselected: Binding(get: { 1 }, set: {_ in}),
     label: Text("Preview"))
   }
 }

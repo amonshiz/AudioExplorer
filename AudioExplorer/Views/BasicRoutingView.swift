@@ -13,14 +13,8 @@ struct BasicRoutingView: View {
   private var outputDevices: [AudioDevice] { allDevices.filter(\.output) }
   private var inputDevices: [AudioDevice] { allDevices.filter(\.input) }
 
-  @Binding var currentInput: AudioDevice
-  @Binding var currentOutput: AudioDevice
-
-  init(allDevices: [AudioDevice], currentInput: Binding<AudioDevice>, currentOutput: Binding<AudioDevice>) {
-    self.allDevices = allDevices
-    self._currentInput = currentInput
-    self._currentOutput = currentOutput
-  }
+  @Binding var currentInput: AudioDevice.ID
+  @Binding var currentOutput: AudioDevice.ID
 
   var body: some View {
     HStack(spacing: 10.0) {
@@ -36,7 +30,7 @@ struct BasicRoutingView_Previews: PreviewProvider {
   static var previews: some View {
     BasicRoutingView(
       allDevices: [],
-      currentInput: Binding { AudioDevice(id: 1) } set: { _ in },
-      currentOutput: Binding { AudioDevice(id: 2) } set: { _ in })
+      currentInput: Binding { 1 } set: { _ in },
+      currentOutput: Binding { 2 } set: { _ in })
   }
 }

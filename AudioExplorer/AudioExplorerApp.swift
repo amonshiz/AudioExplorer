@@ -9,25 +9,26 @@ import SwiftUI
 
 @main
 struct AudioExplorerApp: App {
-  var defaultInput = Binding<AudioDevice> {
-    AudioDeviceManager.shared.defaultInput
-  } set: { (device) in
-    AudioDeviceManager.shared.defaultInput = device
-  }
-
-  var defaultOutput = Binding<AudioDevice> {
-    AudioDeviceManager.shared.defaultOutput
-  } set: { (device) in
-    AudioDeviceManager.shared.defaultOutput = device
-  }
+  @State var defaultInput = AudioDeviceManager.shared.defaultInput.id
+  @State var defaultOutput = AudioDeviceManager.shared.defaultOutput.id
 
   var body: some Scene {
     WindowGroup {
-//      ContentView()
       BasicRoutingView(
         allDevices: AudioDeviceManager.shared.allDevices,
-        currentInput: defaultInput,
-        currentOutput: defaultOutput)
+        currentInput: .init(get: {
+          defaultInput
+        }, set: { newID in
+          AudioDeviceManager.shared.defaultInput = AudioDeviceManager.shared.allDevices.first { $0.id == newID }!
+          defaultInput = newID
+        }),
+        currentOutput: .init(get: {
+          defaultOutput
+        }, set: { newID in
+          AudioDeviceManager.shared.defaultOutput = AudioDeviceManager.shared.allDevices.first { $0.id == newID }!
+          defaultOutput = newID
+        })
+      )
     }
   }
 }
